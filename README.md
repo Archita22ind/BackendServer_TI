@@ -1,6 +1,6 @@
 # BackendServer_TI
 
-## ** Server for Talent Intelligence Dashboard**
+## Server for Talent Intelligence Dashboard
 
 ## Prerequisites
 
@@ -16,12 +16,10 @@ To install Node.js on Linux:
 
 Add .env file with below details-
 
-# Port number
-
+`# Port number`
 `PORT=XXXX`
 
-# URL of the Mongo DB
-
+`# URL of the Mongo DB`
 `MONGODB_URL= <mongoDB connection string>`
 
 ## Installing
