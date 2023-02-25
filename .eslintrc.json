@@ -8,6 +8,7 @@
   "parserOptions": {
     "ecmaVersion": 2018
   },
+  "parser": "babel-eslint",
   "rules": {
     "no-console": "error",
     "func-names": "off",
