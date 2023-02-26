@@ -5,30 +5,33 @@ const sortObjectDesc = require('../utils/sortObjectDesc');
 getSkills = async (queryJobBoards, filterOptions) => {
   const finalList = [];
   const promises = getAllFilteredJobs(queryJobBoards, filterOptions);
-  let skillSet = SKILL_SET;
   const skillSetResult = {};
 
   return Promise.all(promises).then((results) => {
     results.forEach((e) => {
       e.forEach((v) => {
-        finalList.push({ job_description: v.data.job_description });
+        finalList.push({ job_description: v.data.job_description});
       });
     });
 
     finalList.forEach((v) => {
-      skillSet.forEach((e) => {
-        if (v.job_description?.includes(e.skill)) {
-          e.count = e.count + 1;
-          skillSetResult[e.skill] = e.count;
+      SKILL_SET.forEach((skill) => {
+        let regex = new RegExp("\\b" + skill + "\\b", "i");
+        if (regex.test( v.job_description)) {
+          skillSetResult[skill] = skill in skillSetResult ?
+             1 + skillSetResult[skill] : 0;
+            }
         }
-      });
+      );
     });
 
-    Object.keys(skillSetResult).forEach(function (key) {
-      skillSetResult[key] = (skillSetResult[key] / finalList.length) * 100;
-    });
+    const result = Object.keys(skillSetResult).filter(e=> skillSetResult[e]>0)
+    .reduce(function ( obj, key) {
+      obj[key] = ((skillSetResult[key] / finalList.length) * 100).toFixed(2);
+      return obj;
+    },{});
 
-    return sortObjectDesc(skillSetResult);
+    return sortObjectDesc(result);
   });
 };
 

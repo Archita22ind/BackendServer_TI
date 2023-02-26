@@ -15,44 +15,44 @@ getBenefits = async (queryJobBoards, filterOptions) => {
     let count = finalList.length;
 
     const fourOOnek =
-      (finalList.filter((e) => {
+      ((finalList.filter((e) => {
         return e._401K === 1;
       }).length /
         count) *
-      100;
+      100).toFixed(2);
 
     const PTO =
-      (finalList.filter((e) => {
+      ((finalList.filter((e) => {
         return e.PTO === 1;
       }).length /
         count) *
-      100;
+      100).toFixed(2);
 
     const medicalInsurance =
-      (finalList.filter((e) => {
+      ((finalList.filter((e) => {
         return e.insurance?.health === 1;
       }).length /
         count) *
-      100;
+      100).toFixed(2);
 
     const dentalInsurance =
-      (finalList.filter((e) => {
+      ((finalList.filter((e) => {
         return e.insurance?.dental === 1;
       }).length /
         count) *
-      100;
+      100).toFixed(2);
     const visionInsurance =
-      (finalList.filter((e) => {
+      ((finalList.filter((e) => {
         return e.insurance?.vision === 1;
       }).length /
         count) *
-      100;
+      100).toFixed(2);
     const lifeInsurance =
-      (finalList.filter((e) => {
+      ((finalList.filter((e) => {
         return e.insurance?.life === 1;
       }).length /
         count) *
-      100;
+      100).toFixed(2);
 
     const benefitPercent = {
       '401k': fourOOnek,
